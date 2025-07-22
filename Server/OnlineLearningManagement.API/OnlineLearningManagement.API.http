@@ -1,0 +1,6 @@
+@OnlineLearningManagement.API_HostAddress = http://localhost:5078
+
+GET {{OnlineLearningManagement.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
