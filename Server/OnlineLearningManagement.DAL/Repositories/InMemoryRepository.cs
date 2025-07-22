@@ -15,7 +15,7 @@ namespace OnlineLearningManagement.DAL.Repositories
 
 		public IEnumerable<T> GetAll() => _entities.Values;
 
-		public T GetById(Guid id) => _entities.TryGetValue(id, out var entity) ? entity : null;
+		public T? GetById(Guid id) => _entities.TryGetValue(id, out var entity) ? entity : null;
 
 		public void Add(T entity)
 		{

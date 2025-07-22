@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineLearningManagement.BL\OnlineLearningManagement.BL.csproj" />
     <ProjectReference Include="..\OnlineLearningManagement.DAL\OnlineLearningManagement.DAL.csproj" />
   </ItemGroup>
 

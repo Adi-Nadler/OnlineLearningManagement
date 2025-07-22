@@ -10,7 +10,6 @@ namespace OnlineLearningManagement.Model
 	{
 		public Guid Id { get; set; } = Guid.NewGuid();
 		public required string Name { get; set; }
-		public int CategoryId { get; set; }
 		public DateTime StartDate { get; set; }
 		public DateTime EndDate { get; set; }
 		public System.DayOfWeek DayOfWeek { get; set; }

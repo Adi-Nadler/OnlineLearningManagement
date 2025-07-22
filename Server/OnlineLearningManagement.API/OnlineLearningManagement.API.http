@@ -1,6 +1,41 @@
 @OnlineLearningManagement.API_HostAddress = http://localhost:5078
 
-GET {{OnlineLearningManagement.API_HostAddress}}/courses/
+### Get all courses
+GET {{OnlineLearningManagement.API_HostAddress}}/api/courses
 Accept: application/json
 
-###
+### Create a new course
+POST {{OnlineLearningManagement.API_HostAddress}}/api/courses
+Content-Type: application/json
+
+{
+  "name": "Introduction to C#",
+  "startDate": "2025-08-01T09:00:00",
+  "endDate": "2025-09-01T11:00:00",
+  "dayOfWeek": 1,
+  "durationInHours": 2,
+  "price": 199.99,
+  "isActive": true
+}
+
+### Get course by ID (replace with real ID after creation)
+GET {{OnlineLearningManagement.API_HostAddress}}/api/courses/{{courseId}}
+Accept: application/json
+
+### Update course (replace ID)
+PUT {{OnlineLearningManagement.API_HostAddress}}/api/courses/{{courseId}}
+Content-Type: application/json
+
+{
+  "name": "Updated C# Course",
+  "startDate": "2025-08-10T09:00:00",
+  "endDate": "2025-09-10T11:00:00",
+  "dayOfWeek": 3,
+  "durationInHours": 3,
+  "price": 249.99,
+  "isActive": false
+}
+
+### Delete course (replace ID)
+DELETE {{OnlineLearningManagement.API_HostAddress}}/api/courses/{{courseId}}
+
