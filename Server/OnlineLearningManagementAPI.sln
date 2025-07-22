@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineLearningManagement.BL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineLearningManagement.DAL", "OnlineLearningManagement.DAL\OnlineLearningManagement.DAL.csproj", "{A6B2827A-0577-0A02-4B3D-DBFBA8DBE6DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineLearningManagement.Model", "OnlineLearningManagement.Model\OnlineLearningManagement.Model.csproj", "{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A6B2827A-0577-0A02-4B3D-DBFBA8DBE6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6B2827A-0577-0A02-4B3D-DBFBA8DBE6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6B2827A-0577-0A02-4B3D-DBFBA8DBE6DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

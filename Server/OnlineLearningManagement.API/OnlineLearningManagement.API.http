@@ -1,6 +1,6 @@
 @OnlineLearningManagement.API_HostAddress = http://localhost:5078
 
-GET {{OnlineLearningManagement.API_HostAddress}}/weatherforecast/
+GET {{OnlineLearningManagement.API_HostAddress}}/courses/
 Accept: application/json
 
 ###
