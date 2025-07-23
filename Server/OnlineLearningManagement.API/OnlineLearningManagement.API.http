@@ -1,5 +1,7 @@
 @OnlineLearningManagement.API_HostAddress = http://localhost:5078
 
+########################################## courses ##########################################
+
 ### Get all courses
 GET {{OnlineLearningManagement.API_HostAddress}}/api/courses
 Accept: application/json
@@ -39,3 +41,41 @@ Content-Type: application/json
 ### Delete course (replace ID)
 DELETE {{OnlineLearningManagement.API_HostAddress}}/api/courses/{{courseId}}
 
+########################################## students ##########################################
+
+### Get all students
+GET {{OnlineLearningManagement.API_HostAddress}}/api/students
+Accept: application/json
+
+### Create a new student
+POST {{OnlineLearningManagement.API_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "name": "Dana Cohen",
+  "email": "dana.cohen@example.com",
+  "dateOfBirth": "2000-05-15T00:00:00",
+  "phoneNumber": "054-1234567",
+  "enrollmentDate": "2025-07-01T00:00:00",
+  "isActive": true
+}
+
+### Get student by ID (replace with real ID after creation)
+GET {{OnlineLearningManagement.API_HostAddress}}/api/students/{{studentId}}
+Accept: application/json
+
+### Update student (replace ID)
+PUT {{OnlineLearningManagement.API_HostAddress}}/api/students/{{studentId}}
+Content-Type: application/json
+
+{
+  "name": "Dana Cohen Updated",
+  "email": "dana.updated@example.com",
+  "dateOfBirth": "2000-05-15T00:00:00",
+  "phoneNumber": "054-7654321",
+  "enrollmentDate": "2025-07-01T00:00:00",
+  "isActive": false
+}
+
+### Delete student (replace ID)
+DELETE {{OnlineLearningManagement.API_HostAddress}}/api/students/{{studentId}}

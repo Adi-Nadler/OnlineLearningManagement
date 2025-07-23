@@ -13,6 +13,7 @@ builder.Services.AddSingleton<IRepository<Student>, InMemoryDictionaryRepository
 builder.Services.AddSingleton<IRepository<Course>, InMemoryDictionaryRepository<Course>>();
 builder.Services.AddSingleton<IRepository<Enrolment>, InMemoryDictionaryRepository<Enrolment>>();
 builder.Services.AddSingleton<CourseService>();
+builder.Services.AddSingleton<StudentService>();
 
 
 builder.Services.AddControllers();
