@@ -88,7 +88,7 @@ GET {{OnlineLearningManagement.API_HostAddress}}/api/enrolments
 Accept: application/json
 
 ### Get enrolment by ID
-GET {{OnlineLearningManagement.API_HostAddress}}/api/enrolments/{id}
+GET {{OnlineLearningManagement.API_HostAddress}}/api/enrolments/7be738ea-ebac-42bd-b800-d52b2b5074d1
 Accept: application/json
 
 ### Create enrolment
@@ -97,9 +97,16 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "studentId": "cec73f93-5587-4a23-819b-79fef4c66fc1",
-  "courseId": "3742c75e-4df1-4a86-aaf7-a6e93daada7h"
+  "studentId": "00000000-0000-0000-0000-000000000001",
+  "courseId": "00000000-0000-0000-0000-000000000002"
 }
 
 ### Delete enrolment
-DELETE {{OnlineLearningManagement.API_HostAddress}}/api/enrolments/{id}
+DELETE {{OnlineLearningManagement.API_HostAddress}}/api/enrolments/7be738ea-ebac-42bd-b800-d52b2b5074d2
+
+
+########################################## reports ##########################################
+
+### Get enrolments per course report
+GET {{OnlineLearningManagement.API_HostAddress}}/api/reports/enrolments-per-course
+Accept: application/json

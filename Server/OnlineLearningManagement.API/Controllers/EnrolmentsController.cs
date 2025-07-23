@@ -20,7 +20,7 @@ namespace OnlineLearningManagement.API.Controllers
 		[HttpGet]
 		public ActionResult<IEnumerable<EnrolmentResponseDTO>> GetAll()
 		{
-			var enrolments = _enrolmentService.GetAllEnrolments()
+			var enrolments = _enrolmentService.GetAllEnrolmentWithDetails()
 											  .Select(EnrolmentResponseDTO.FromEntity);
 			return Ok(enrolments);
 		}

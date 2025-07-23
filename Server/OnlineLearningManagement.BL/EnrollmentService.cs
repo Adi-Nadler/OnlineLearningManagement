@@ -16,10 +16,15 @@ namespace OnlineLearningManagement.BL
 			_studentRepository = studentRepository;
 			_courseRepository = courseRepository;
 		}
-				
-		public IEnumerable<EnrolmentWithDetails> GetAllEnrolments()
+
+		public IEnumerable<Enrolment> GetAllEnrolments()
 		{
-			var enrolments = _enrolmentRepository.GetAll();
+			return _enrolmentRepository.GetAll();
+		}
+
+		public IEnumerable<EnrolmentWithDetails> GetAllEnrolmentWithDetails()
+		{
+			var enrolments = GetAllEnrolments();
 			foreach (var enrolment in enrolments)
 			{
 				yield return GetEnrolmentWithDetails(enrolment);
