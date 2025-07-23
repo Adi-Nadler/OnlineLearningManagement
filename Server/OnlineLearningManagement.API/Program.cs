@@ -1,5 +1,6 @@
 using OnlineLearningManagement.API.Middleware;
 using OnlineLearningManagement.BL;
+using OnlineLearningManagement.DAL.DataSeed;
 using OnlineLearningManagement.DAL.Interfaces;
 using OnlineLearningManagement.DAL.Repositories;
 using OnlineLearningManagement.Model;
@@ -25,6 +26,15 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+// Seed data
+using (var scope = app.Services.CreateScope())
+{
+	var studentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Student>>();
+	var courseRepo = scope.ServiceProvider.GetRequiredService<IRepository<Course>>();
+	var enrolmentRepo = scope.ServiceProvider.GetRequiredService<IRepository<Enrolment>>();
+	InMemoryDataSeeder.Seed(studentRepo, courseRepo, enrolmentRepo);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
