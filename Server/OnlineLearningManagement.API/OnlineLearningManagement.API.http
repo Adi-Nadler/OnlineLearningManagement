@@ -79,3 +79,27 @@ Content-Type: application/json
 
 ### Delete student (replace ID)
 DELETE {{OnlineLearningManagement.API_HostAddress}}/api/students/{{studentId}}
+
+
+########################################## enrolments ##########################################
+
+### Get all enrolments
+GET {{OnlineLearningManagement.API_HostAddress}}/api/enrolments
+Accept: application/json
+
+### Get enrolment by ID
+GET {{OnlineLearningManagement.API_HostAddress}}/api/enrolments/{id}
+Accept: application/json
+
+### Create enrolment
+POST {{OnlineLearningManagement.API_HostAddress}}/api/enrolments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "studentId": "cec73f93-5587-4a23-819b-79fef4c66fc1",
+  "courseId": "3742c75e-4df1-4a86-aaf7-a6e93daada7h"
+}
+
+### Delete enrolment
+DELETE {{OnlineLearningManagement.API_HostAddress}}/api/enrolments/{id}

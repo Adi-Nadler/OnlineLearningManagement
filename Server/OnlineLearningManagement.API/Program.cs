@@ -14,7 +14,7 @@ builder.Services.AddSingleton<IRepository<Course>, InMemoryDictionaryRepository<
 builder.Services.AddSingleton<IRepository<Enrolment>, InMemoryDictionaryRepository<Enrolment>>();
 builder.Services.AddSingleton<CourseService>();
 builder.Services.AddSingleton<StudentService>();
-
+builder.Services.AddSingleton<EnrolmentService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

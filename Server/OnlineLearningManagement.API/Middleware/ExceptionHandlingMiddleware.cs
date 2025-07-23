@@ -30,6 +30,11 @@ namespace OnlineLearningManagement.API.Middleware
 				_logger.LogWarning(ex, "Unauthorized access: {Message}", ex.Message);
 				await HandleExceptionAsync(context, HttpStatusCode.Unauthorized, ex.Message);
 			}
+			catch (InvalidOperationException ex)
+			{
+				_logger.LogWarning(ex, "Invalid operation: {Message}", ex.Message);
+				await HandleExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message);
+			}
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "An unexpected error occurred: {Message}", ex.Message);
