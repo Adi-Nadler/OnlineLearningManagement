@@ -53,3 +53,16 @@ TestResults/
 ## Publish output
 publish/
 wwwro
+
+# Angular build artifacts
+**/dist/
+**/tmp/
+**/.angular/
+**/.output/
+
+# IDE specific
+*.sublime-workspace
+*.sublime-project
+
+# Angular environment
+**/src/environments/environment*.ts
