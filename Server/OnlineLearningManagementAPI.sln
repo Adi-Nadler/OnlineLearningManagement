@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineLearningManagement.DA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineLearningManagement.Model", "OnlineLearningManagement.Model\OnlineLearningManagement.Model.csproj", "{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineLearningManagement.Tests", "OnlineLearningManagement.Tests\OnlineLearningManagement.Tests.csproj", "{312568D0-E432-4BCE-AD84-4611A76B4905}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B87C75B3-7D24-4D25-A52A-B6B5ECEF9F27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{312568D0-E432-4BCE-AD84-4611A76B4905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312568D0-E432-4BCE-AD84-4611A76B4905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312568D0-E432-4BCE-AD84-4611A76B4905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312568D0-E432-4BCE-AD84-4611A76B4905}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
