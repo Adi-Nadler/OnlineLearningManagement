@@ -11,12 +11,12 @@ namespace OnlineLearningManagement.BL
 	public class CourseService
 	{
 		private readonly IRepository<Course> _courseRepository;
-		private readonly EnrolmentService _enrolmentService;  
+		private readonly IRepository<Enrolment> _enrolmentRepository; // Direct dependency
 
-		public CourseService(IRepository<Course> courseRepository, EnrolmentService enrolmentService)
+		public CourseService(IRepository<Course> courseRepository, IRepository<Enrolment> enrolmentRepository)
 		{
 			_courseRepository = courseRepository;
-			_enrolmentService = enrolmentService;
+			_enrolmentRepository = enrolmentRepository;
 		}
 
 		public IEnumerable<Course> GetAllCourses()
@@ -68,17 +68,17 @@ namespace OnlineLearningManagement.BL
 		public void DeleteCourse(Guid id)
 		{
 			var existingCourse = _courseRepository.GetById(id);
+			if (existingCourse == null)
+				throw new KeyNotFoundException("Course not found");
 
-			// If course does not exist, throw an exception in GetById method  
-
-			// Delete all enrolments for this course using EnrolmentService  
-			var enrolments = _enrolmentService.GetAllEnrolments()
+			// Delete enrolments directly
+			var enrolments = _enrolmentRepository.GetAll()
 				.Where(e => e.CourseId == id)
 				.ToList();
 
 			foreach (var enrolment in enrolments)
 			{
-				_enrolmentService.DeleteEnrolment(enrolment.Id);
+				_enrolmentRepository.Delete(enrolment.Id);
 			}
 
 			_courseRepository.Delete(id);
@@ -90,7 +90,7 @@ namespace OnlineLearningManagement.BL
 				throw new ArgumentNullException(nameof(course));
 			if (string.IsNullOrWhiteSpace(course.Name))
 				throw new ArgumentException("Course name cannot be empty.");
-			if (course.StartDate >= course.EndDate)
+			if (course.StartDate > course.EndDate)
 				throw new ArgumentException("Start date must be earlier than end date.");
 		}
 	}

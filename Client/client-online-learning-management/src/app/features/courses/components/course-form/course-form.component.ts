@@ -79,7 +79,7 @@ export class CourseFormComponent implements OnInit {
     if (!this.formData.startDate || !this.formData.endDate) {
       return false;
     }
-    return this.formData.startDate >= this.formData.endDate;
+    return this.formData.startDate > this.formData.endDate;
   }
 
   get dayOfWeekString(): string {
