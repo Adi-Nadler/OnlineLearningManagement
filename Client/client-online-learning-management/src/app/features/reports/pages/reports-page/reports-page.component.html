@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <!-- Page Header -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h1 class="h2 mb-0">Enrolment Reports</h1>
+          <p class="text-muted mb-0">View student enrolment statistics by course</p>
+        </div>
+        <button class="btn btn-outline-primary" (click)="onRefresh()" [disabled]="loading()">
+          <span *ngIf="loading()" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </span>
+          <i *ngIf="!loading()" class="bi bi-arrow-clockwise"></i> Refresh
+        </button>
+      </div>
+
+      <!-- Reports Table Card -->
+      <div class="card shadow-sm">
+        <div class="card-header bg-white py-3">
+          <h5 class="card-title">Students per Course</h5>
+        </div>
+        <div class="card-body p-0">
+          <div *ngIf="loading()" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="text-muted mt-2">Loading report data...</p>
+          </div>
+          <app-reports-list
+            *ngIf="!loading()"
+            [reports]="reports()">
+          </app-reports-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
