@@ -9,6 +9,17 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Empty state when no data -->
+      <tr *ngIf="data.length === 0">
+        <td [attr.colspan]="columns.length + (showActions ? 1 : 0)" class="text-center py-5">
+          <div class="text-muted">
+            <i class="bi bi-inbox display-1 d-block mb-3 opacity-25"></i>
+            <h5 class="text-muted">{{ emptyMessage }}</h5>
+            <p class="text-muted mb-0">There are no items to display at the moment.</p>
+          </div>
+        </td>
+      </tr>
+      <!-- Data rows -->
       <tr *ngFor="let item of data">
         <td *ngFor="let column of columns">
           <ng-container [ngSwitch]="column.type">

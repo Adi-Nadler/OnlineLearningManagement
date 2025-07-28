@@ -1,0 +1,111 @@
+<!-- Bootstrap Modal -->
+<div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">
+          <i class="bi bi-person-plus"></i> 
+          {{ enrolment ? 'Edit Enrolment' : 'Assign Student to Course' }}
+        </h4>
+        <button type="button" class="btn-close" (click)="onCancel()" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit($event)" #enrolmentForm="ngForm">
+          <div class="row">
+            <!-- Student Selection -->
+            <div class="col-md-6 mb-3">
+              <label for="studentId" class="form-label">
+                Student <span class="text-danger">*</span>
+                <span *ngIf="studentsLoading()" class="spinner-border spinner-border-sm ms-2" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </span>
+              </label>
+              <select
+                id="studentId"
+                name="studentId"
+                class="form-select"
+                [(ngModel)]="formData.studentId"
+                [disabled]="studentsLoading()"
+                required
+                #studentId="ngModel">
+                <option value="" disabled>
+                  {{ studentsLoading() ? 'Loading students...' : 'Select a student' }}
+                </option>
+                <option *ngFor="let student of students" [value]="student.id">
+                  {{ student.name }} ({{ student.email }})
+                </option>
+              </select>
+              <div *ngIf="studentId.invalid && studentId.touched" class="invalid-feedback d-block">
+                Please select a student.
+              </div>
+            </div>
+
+            <!-- Course Selection -->
+            <div class="col-md-6 mb-3">
+              <label for="courseId" class="form-label">
+                Course <span class="text-danger">*</span>
+                <span *ngIf="coursesLoading()" class="spinner-border spinner-border-sm ms-2" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </span>
+              </label>
+              <select
+                id="courseId"
+                name="courseId"
+                class="form-select"
+                [(ngModel)]="formData.courseId"
+                [disabled]="coursesLoading()"
+                required
+                #courseId="ngModel">
+                <option value="" disabled>
+                  {{ coursesLoading() ? 'Loading courses...' : 'Select a course' }}
+                </option>
+                <option *ngFor="let course of courses" [value]="course.id">
+                  {{ course.name }} - ${{ course.price }}
+                </option>
+              </select>
+              <div *ngIf="courseId.invalid && courseId.touched" class="invalid-feedback d-block">
+                Please select a course.
+              </div>
+            </div>
+
+            <!-- Enrollment Date -->
+            <div class="col-12 mb-3">
+              <label for="enrolledAt" class="form-label">Enrolment Date <span class="text-danger">*</span></label>
+              <input
+                type="date"
+                id="enrolledAt"
+                name="enrolledAt"
+                class="form-control"
+                [(ngModel)]="formData.enrolledAt"
+                required
+                #enrolledAt="ngModel">
+              <div *ngIf="enrolledAt.invalid && enrolledAt.touched" class="invalid-feedback d-block">
+                Enrolment date is required.
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
+          <i class="bi bi-x-circle"></i> Cancel
+        </button>
+        <button type="submit" 
+                class="btn btn-primary" 
+                [disabled]="!enrolmentForm.form.valid || studentsLoading() || coursesLoading()"
+                (click)="onSubmit($event)">
+          <span *ngIf="studentsLoading() || coursesLoading()" class="spinner-border spinner-border-sm me-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </span>
+          <i *ngIf="!studentsLoading() && !coursesLoading()" class="bi bi-check-circle"></i> 
+          {{ enrolment ? 'Update Enrolment' : 'Create Enrolment' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

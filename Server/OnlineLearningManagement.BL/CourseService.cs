@@ -11,10 +11,12 @@ namespace OnlineLearningManagement.BL
 	public class CourseService
 	{
 		private readonly IRepository<Course> _courseRepository;
+		private readonly EnrolmentService _enrolmentService;  
 
-		public CourseService(IRepository<Course> courseRepository)
+		public CourseService(IRepository<Course> courseRepository, EnrolmentService enrolmentService)
 		{
 			_courseRepository = courseRepository;
+			_enrolmentService = enrolmentService;
 		}
 
 		public IEnumerable<Course> GetAllCourses()
@@ -46,7 +48,7 @@ namespace OnlineLearningManagement.BL
 
 		public Course UpdateCourse(Guid id, Course updatedCourse)
 		{
-			if (updatedCourse == null) 
+			if (updatedCourse == null)
 				throw new ArgumentNullException(nameof(updatedCourse));
 			if (string.IsNullOrWhiteSpace(updatedCourse.Name))
 				throw new ArgumentException("Course name cannot be empty.");
@@ -72,7 +74,17 @@ namespace OnlineLearningManagement.BL
 		{
 			var existingCourse = _courseRepository.GetById(id);
 
-			// If course does not exist, throw an exception in  GetById method
+			// If course does not exist, throw an exception in GetById method  
+
+			// Delete all enrolments for this course using EnrolmentService  
+			var enrolments = _enrolmentService.GetAllEnrolments()
+				.Where(e => e.CourseId == id)
+				.ToList();
+
+			foreach (var enrolment in enrolments)
+			{
+				_enrolmentService.DeleteEnrolment(enrolment.Id);
+			}
 
 			_courseRepository.Delete(id);
 		}

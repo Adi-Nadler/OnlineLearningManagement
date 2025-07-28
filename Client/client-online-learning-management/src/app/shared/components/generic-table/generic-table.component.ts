@@ -15,6 +15,7 @@ export class GenericTableComponent<T> {
   @Input() showActions = true;
   @Input() showEdit = true;
   @Input() showDelete = true;
+  @Input() emptyMessage = 'No data available';
 
   @Output() onEdit = new EventEmitter<T>();
   @Output() onDelete = new EventEmitter<T>();

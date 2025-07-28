@@ -1,0 +1,8 @@
+<app-generic-table
+  [columns]="columns"
+  [data]="enrolments"
+  [showEdit]="false"
+  emptyMessage="No enrolments found"
+  (onEdit)="onEdit($event)"
+  (onDelete)="onDelete($event)">
+</app-generic-table>

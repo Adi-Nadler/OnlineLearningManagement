@@ -1,0 +1,12 @@
+/* Bootstrap modal handles all styling, custom enhancements only */
+.modal {
+  backdrop-filter: blur(3px);
+}
+
+.form-label .text-danger {
+  font-size: 0.875rem;
+}
+
+.invalid-feedback {
+  font-size: 0.8rem;
+}

@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 import { Course } from '../../../models/course.model';
 import { ApiService } from '../../../core/services/api.service';
 import { computed, effect } from '@angular/core';
+import { DataRefreshService } from '../../../core/services/data-refresh.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class CourseService {
   private readonly _courses = signal<Course[]>([]);
   readonly courses = computed(() => this._courses());
 
-  constructor(private api: ApiService) {
+  constructor(
+    private api: ApiService,
+    private refreshService: DataRefreshService
+  ) {
     this.loadCourses();
   }
 
@@ -55,6 +59,8 @@ export class CourseService {
     this.api.delete(`${this.baseUrl}/${id}`).subscribe({
       next: () => {
         this._courses.update(courses => courses.filter(c => c.id !== id));
+        // Trigger specific course data refresh for other features
+        this.refreshService.triggerCourseDataRefresh();
       },
       error: (err) => console.error('Failed to delete course', err)
     });
