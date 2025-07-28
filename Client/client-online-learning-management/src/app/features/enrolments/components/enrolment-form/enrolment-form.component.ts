@@ -21,6 +21,7 @@ interface EnrolmentFormData {
 })
 export class EnrolmentFormComponent implements OnInit {
   @Input() enrolment: Enrolment | null = null;
+  @Input() existingEnrolments: Enrolment[] = [];
   @Output() submit = new EventEmitter<Enrolment>();
   @Output() cancel = new EventEmitter<void>();
 
@@ -73,6 +74,38 @@ export class EnrolmentFormComponent implements OnInit {
   private formatDateForInput(date: Date | string): string {
     const d = new Date(date);
     return d.toISOString().split('T')[0];
+  }
+
+  isDuplicateEnrolment(): boolean {
+    if (!this.formData.studentId || !this.formData.courseId) {
+      return false;
+    }
+
+    // Check if this combination already exists (excluding current enrolment if editing)
+    return this.existingEnrolments.some(enrolment => {
+      const isSameStudent = enrolment.studentId === this.formData.studentId;
+      const isSameCourse = enrolment.courseId === this.formData.courseId;
+      const isNotCurrentEnrolment = !this.enrolment || enrolment.enrolmentId !== this.enrolment.enrolmentId;
+      
+      return isSameStudent && isSameCourse && isNotCurrentEnrolment;
+    });
+  }
+
+  getStudentName(studentId: string): string {
+    const student = this.students.find(s => s.id === studentId);
+    return student ? student.name : '';
+  }
+
+  getCourseName(courseId: string): string {
+    const course = this.courses.find(c => c.id === courseId);
+    return course ? course.name : '';
+  }
+
+  isFormValid(): boolean {
+    return this.formData.studentId !== '' && 
+           this.formData.courseId !== '' && 
+           this.formData.enrolledAt !== '' && 
+           !this.isDuplicateEnrolment();
   }
 
   onSubmit(event?: Event) {

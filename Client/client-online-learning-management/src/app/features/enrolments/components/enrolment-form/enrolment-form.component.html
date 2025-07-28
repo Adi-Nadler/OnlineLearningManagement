@@ -71,6 +71,15 @@
               </div>
             </div>
 
+            <!-- Duplicate Enrolment Warning -->
+            <div *ngIf="isDuplicateEnrolment()" class="col-12 mb-3">
+              <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle"></i>
+                <strong>Duplicate Enrolment:</strong> 
+                {{ getStudentName(formData.studentId) }} is already enrolled in {{ getCourseName(formData.courseId) }}.
+              </div>
+            </div>
+
             <!-- Enrollment Date -->
             <div class="col-12 mb-3">
               <label for="enrolledAt" class="form-label">Enrolment Date <span class="text-danger">*</span></label>
@@ -97,7 +106,7 @@
         </button>
         <button type="submit" 
                 class="btn btn-primary" 
-                [disabled]="!enrolmentForm.form.valid || studentsLoading() || coursesLoading()"
+                [disabled]="!isFormValid() || studentsLoading() || coursesLoading()"
                 (click)="onSubmit($event)">
           <span *ngIf="studentsLoading() || coursesLoading()" class="spinner-border spinner-border-sm me-2" role="status">
             <span class="visually-hidden">Loading...</span>

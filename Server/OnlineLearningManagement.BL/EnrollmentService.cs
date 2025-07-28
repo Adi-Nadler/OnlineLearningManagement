@@ -57,6 +57,13 @@ namespace OnlineLearningManagement.BL
 			if (course == null)
 				throw new InvalidOperationException("Course not found.");
 
+			// Check if student is already enrolled in this course
+			var existingEnrolment = _enrolmentRepository.GetAll()
+				.FirstOrDefault(e => e.StudentId == enrolment.StudentId && e.CourseId == enrolment.CourseId);
+
+			if (existingEnrolment != null)
+				throw new InvalidOperationException("Student is already enrolled in this course.");
+
 			if (enrolment.Id == Guid.Empty)
 				enrolment.Id = Guid.NewGuid();
 			if (enrolment.EnrolledAt == default)

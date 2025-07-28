@@ -2,18 +2,19 @@
 
 namespace OnlineLearningManagement.API.DTOs
 {
-	public class EnrolmentResponseDTO
+	public class EnrolmentResponseDTO: EnrolmentDTO
 	{
 		public Guid EnrolmentId { get; set; }
-		public DateTime EnrolledAt { get; set; }
-		public StudentDTO Student { get; set; } = null!;
-		public CourseDTO Course { get; set; } = null!;
+		public StudentResponseDTO Student { get; set; } = null!;
+		public CourseResponseDTO Course { get; set; } = null!;
 
 		public static EnrolmentResponseDTO FromEntity(EnrolmentWithDetails entity)
 		{
 			return new EnrolmentResponseDTO
 			{
 				EnrolmentId = entity.Enrolment.Id,
+				StudentId = entity.Enrolment.StudentId,
+				CourseId = entity.Enrolment.CourseId,
 				EnrolledAt = entity.Enrolment.EnrolledAt,
 				Student = new StudentResponseDTO
 				{

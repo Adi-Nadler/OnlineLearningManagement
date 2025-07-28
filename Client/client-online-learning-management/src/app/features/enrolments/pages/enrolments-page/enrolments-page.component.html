@@ -29,6 +29,7 @@
       <app-enrolment-form
         *ngIf="showForm"
         [enrolment]="selectedEnrolment"
+        [existingEnrolments]="enrolments()"
         (submit)="onFormSubmit($event)"
         (cancel)="onFormCancel()">
       </app-enrolment-form>
