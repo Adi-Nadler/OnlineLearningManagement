@@ -35,10 +35,8 @@ namespace OnlineLearningManagement.BL
 
 		public Course AddCourse(Course course)
 		{
-			if (course == null)
-				throw new ArgumentNullException(nameof(course));
-			if (string.IsNullOrWhiteSpace(course.Name))
-				throw new ArgumentException("Course name cannot be empty.");
+			ValidateCourse(course);
+
 			if (course.Id == Guid.Empty)
 				course.Id = Guid.NewGuid();
 
@@ -47,11 +45,8 @@ namespace OnlineLearningManagement.BL
 		}
 
 		public Course UpdateCourse(Guid id, Course updatedCourse)
-		{
-			if (updatedCourse == null)
-				throw new ArgumentNullException(nameof(updatedCourse));
-			if (string.IsNullOrWhiteSpace(updatedCourse.Name))
-				throw new ArgumentException("Course name cannot be empty.");
+		{			
+			ValidateCourse(updatedCourse);
 
 			var existingCourse = _courseRepository.GetById(id);
 			if (existingCourse == null)
@@ -87,6 +82,16 @@ namespace OnlineLearningManagement.BL
 			}
 
 			_courseRepository.Delete(id);
+		}
+
+		private void ValidateCourse(Course course)
+		{
+			if (course == null)
+				throw new ArgumentNullException(nameof(course));
+			if (string.IsNullOrWhiteSpace(course.Name))
+				throw new ArgumentException("Course name cannot be empty.");
+			if (course.StartDate >= course.EndDate)
+				throw new ArgumentException("Start date must be earlier than end date.");
 		}
 	}
 

@@ -40,6 +40,12 @@ export class CourseFormComponent implements OnInit {
       event.preventDefault();
       event.stopPropagation();
     }
+    
+    // Check date validation
+    if (this.isDateValidationError()) {
+      return;
+    }
+    
     this.submit.emit({ ...this.course, ...this.formData } as Course);
   }
 
@@ -67,6 +73,13 @@ export class CourseFormComponent implements OnInit {
 
   set endDateString(value: string) {
     this.formData.endDate = new Date(value);
+  }
+
+  isDateValidationError(): boolean {
+    if (!this.formData.startDate || !this.formData.endDate) {
+      return false;
+    }
+    return this.formData.startDate >= this.formData.endDate;
   }
 
   get dayOfWeekString(): string {

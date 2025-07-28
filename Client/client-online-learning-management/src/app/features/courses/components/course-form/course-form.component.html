@@ -37,6 +37,9 @@
           [(ngModel)]="endDateString"
           required
           #endDate="ngModel">
+        <div *ngIf="isDateValidationError()" class="alert alert-danger mt-2">
+          Start date must be earlier than end date.
+        </div>
       </div>
 
       <div class="form-group">
@@ -72,15 +75,18 @@
 
       <div class="form-group">
         <label for="price">Price</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          [(ngModel)]="formData.price"
-          required
-          min="0"
-          step="0.01"
-          #price="ngModel">
+        <div class="price-input-group">
+          <span class="currency-symbol">$</span>
+          <input
+            type="number"
+            id="price"
+            name="price"
+            [(ngModel)]="formData.price"
+            required
+            min="0"
+            step="0.01"
+            #price="ngModel">
+        </div>
       </div>
 
       <div class="form-group">
@@ -95,7 +101,7 @@
 
       <div class="form-footer">
         <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!courseForm.form.valid">
+        <button type="submit" class="btn btn-primary" [disabled]="!courseForm.form.valid || isDateValidationError()">
           {{ course ? 'Update' : 'Add' }}
         </button>
       </div>
