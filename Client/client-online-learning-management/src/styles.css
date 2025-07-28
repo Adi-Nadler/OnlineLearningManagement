@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --bs-body-bg: #f8f9fa;
+  --bs-border-radius: 8px;
+  --bs-border-radius-sm: 6px;
+  --bs-border-radius-lg: 10px;
+}
+
+body {
+  padding: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Custom enhancements */
+.card {
+  border: none;
+  border-radius: var(--bs-border-radius-lg);
+}
+
+.btn {
+  border-radius: var(--bs-border-radius-sm);
+}
+
+.table {
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
+}
+
+.table thead th {
+  border-bottom: 2px solid #dee2e6;
+  color: #495057;
+  font-weight: 600;
+}
+
+.modal-content {
+  border-radius: var(--bs-border-radius-lg);
+  border: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.form-control, .form-select {
+  border-radius: var(--bs-border-radius-sm);
+}

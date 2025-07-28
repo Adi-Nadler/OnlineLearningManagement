@@ -1,0 +1,104 @@
+<div class="popup-overlay" (click)="onCancel()">
+  <div class="popup" (click)="$event.stopPropagation()">
+    <div class="popup-header">
+      <h3 class="popup-title">{{ course ? 'Edit Course' : 'Add Course' }}</h3>
+      <button class="close-button" (click)="onCancel()">&times;</button>
+    </div>
+
+    <form (ngSubmit)="onSubmit($event)" #courseForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          [(ngModel)]="formData.name"
+          required
+          #name="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input
+          type="date"
+          id="startDate"
+          name="startDate"
+          [(ngModel)]="startDateString"
+          required
+          #startDate="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input
+          type="date"
+          id="endDate"
+          name="endDate"
+          [(ngModel)]="endDateString"
+          required
+          #endDate="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="dayOfWeek">Day of Week</label>
+        <select
+          id="dayOfWeek"
+          name="dayOfWeek"
+          [(ngModel)]="dayOfWeekString"
+          required
+          #dayOfWeek="ngModel">
+          <option value="0">Sunday</option>
+          <option value="1">Monday</option>
+          <option value="2">Tuesday</option>
+          <option value="3">Wednesday</option>
+          <option value="4">Thursday</option>
+          <option value="5">Friday</option>
+          <option value="6">Saturday</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="durationInHours">Duration (Hours)</label>
+        <input
+          type="number"
+          id="durationInHours"
+          name="durationInHours"
+          [(ngModel)]="formData.durationInHours"
+          required
+          min="1"
+          step="1"
+          #duration="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          [(ngModel)]="formData.price"
+          required
+          min="0"
+          step="0.01"
+          #price="ngModel">
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input
+            type="checkbox"
+            name="isActive"
+            [(ngModel)]="formData.isActive">
+          Active
+        </label>
+      </div>
+
+      <div class="form-footer">
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!courseForm.form.valid">
+          {{ course ? 'Update' : 'Add' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

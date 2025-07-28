@@ -1,9 +1,9 @@
 export interface Course {
-  id?: string; // Guid as string, optional כי ב-POST אין Id
+  id?: string; // Guid as string
   name: string;
-  startDate: string; // ISO string
-  endDate: string; // ISO string
-  dayOfWeek: number; // enum DayOfWeek, פה נשמור כמספר 0-6
+  startDate: Date; // C# DateTime
+  endDate: Date; // C# DateTime
+  dayOfWeek: number; // enum DayOfWeek
   durationInHours: number;
   price: number;
   isActive: boolean;
