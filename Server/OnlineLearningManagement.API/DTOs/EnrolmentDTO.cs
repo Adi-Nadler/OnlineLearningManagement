@@ -6,15 +6,13 @@ namespace OnlineLearningManagement.API.DTOs
 	{
 		public Guid StudentId { get; set; }
 		public Guid CourseId { get; set; }
-		public DateTime EnrolledAt { get; set; } = DateTime.UtcNow;
 
 		public Enrolment ToEntity()
 		{
 			return new Enrolment
 			{
 				StudentId = this.StudentId,
-				CourseId = this.CourseId,
-				EnrolledAt = this.EnrolledAt,
+				CourseId = this.CourseId
 			};
 		}
 	}

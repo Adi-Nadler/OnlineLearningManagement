@@ -34,8 +34,4 @@ export class ReportsPageComponent implements OnInit {
       }
     });
   }
-
-  onRefresh() {
-    this.loadReports();
-  }
 }

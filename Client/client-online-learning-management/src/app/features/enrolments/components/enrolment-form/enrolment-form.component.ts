@@ -10,7 +10,6 @@ import { CourseService } from '../../../courses/services/course.service';
 interface EnrolmentFormData {
   studentId: string;
   courseId: string;
-  enrolledAt: string;
 }
 
 @Component({
@@ -27,8 +26,7 @@ export class EnrolmentFormComponent implements OnInit {
 
   formData: EnrolmentFormData = {
     studentId: '',
-    courseId: '',
-    enrolledAt: ''
+    courseId: ''
   };
 
   students: Student[] = [];
@@ -59,21 +57,14 @@ export class EnrolmentFormComponent implements OnInit {
     if (this.enrolment) {
       this.formData = {
         studentId: this.enrolment.studentId,
-        courseId: this.enrolment.courseId,
-        enrolledAt: this.formatDateForInput(this.enrolment.enrolledAt)
+        courseId: this.enrolment.courseId
       };
     } else {
       this.formData = {
         studentId: '',
-        courseId: '',
-        enrolledAt: this.formatDateForInput(new Date())
+        courseId: ''
       };
     }
-  }
-
-  private formatDateForInput(date: Date | string): string {
-    const d = new Date(date);
-    return d.toISOString().split('T')[0];
   }
 
   isDuplicateEnrolment(): boolean {
@@ -104,7 +95,6 @@ export class EnrolmentFormComponent implements OnInit {
   isFormValid(): boolean {
     return this.formData.studentId !== '' && 
            this.formData.courseId !== '' && 
-           this.formData.enrolledAt !== '' && 
            !this.isDuplicateEnrolment();
   }
 
@@ -118,7 +108,7 @@ export class EnrolmentFormComponent implements OnInit {
       ...this.enrolment,
       studentId: this.formData.studentId,
       courseId: this.formData.courseId,
-      enrolledAt: new Date(this.formData.enrolledAt).toISOString()
+      enrolledAt: this.enrolment?.enrolledAt || '' // Keep existing date or let server set it
     };
     
     this.submit.emit(enrolmentData);

@@ -79,22 +79,6 @@
                 {{ getStudentName(formData.studentId) }} is already enrolled in {{ getCourseName(formData.courseId) }}.
               </div>
             </div>
-
-            <!-- Enrollment Date -->
-            <div class="col-12 mb-3">
-              <label for="enrolledAt" class="form-label">Enrolment Date <span class="text-danger">*</span></label>
-              <input
-                type="date"
-                id="enrolledAt"
-                name="enrolledAt"
-                class="form-control"
-                [(ngModel)]="formData.enrolledAt"
-                required
-                #enrolledAt="ngModel">
-              <div *ngIf="enrolledAt.invalid && enrolledAt.touched" class="invalid-feedback d-block">
-                Enrolment date is required.
-              </div>
-            </div>
           </div>
         </form>
       </div>

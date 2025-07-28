@@ -7,6 +7,7 @@ namespace OnlineLearningManagement.API.DTOs
 		public Guid EnrolmentId { get; set; }
 		public StudentResponseDTO Student { get; set; } = null!;
 		public CourseResponseDTO Course { get; set; } = null!;
+		public DateTime EnrolledAt { get; private set; }
 
 		public static EnrolmentResponseDTO FromEntity(EnrolmentWithDetails entity)
 		{
