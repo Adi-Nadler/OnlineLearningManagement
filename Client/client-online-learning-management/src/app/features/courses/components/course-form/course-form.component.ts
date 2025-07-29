@@ -20,7 +20,10 @@ export class CourseFormComponent implements OnInit {
   ngOnInit() {
     if (this.course) {
       this.formData = { 
-        ...this.course
+        ...this.course,
+        // Ensure dates are Date objects for proper validation
+        startDate: new Date(this.course.startDate),
+        endDate: new Date(this.course.endDate)
       };
     } else {
       this.formData = { 

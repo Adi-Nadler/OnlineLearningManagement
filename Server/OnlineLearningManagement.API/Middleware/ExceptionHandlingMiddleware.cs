@@ -20,6 +20,11 @@ namespace OnlineLearningManagement.API.Middleware
 			{
 				await _next(context);
 			}
+			catch (ArgumentException ex)
+			{
+				_logger.LogWarning(ex, "Invalid argument: {Message}", ex.Message);
+				await HandleExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message);
+			}
 			catch (KeyNotFoundException ex)
 			{
 				_logger.LogWarning(ex, "Resource not found: {Message}", ex.Message);

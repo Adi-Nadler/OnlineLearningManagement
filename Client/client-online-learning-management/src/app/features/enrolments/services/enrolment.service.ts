@@ -2,6 +2,7 @@ import { Injectable, signal, computed, effect } from '@angular/core';
 import { ApiService } from '../../../core/services/api.service';
 import { Enrolment } from '../../../models/enrolment.model';
 import { DataRefreshService } from '../../../core/services/data-refresh.service';
+import { ToastService } from '../../../core/services/toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class EnrolmentService {
   
   constructor(
     private apiService: ApiService,
-    private refreshService: DataRefreshService
+    private refreshService: DataRefreshService,
+    private toastService: ToastService
   ) {
     this.loadEnrolments();
     this.setupRefreshListener();
@@ -27,7 +29,10 @@ export class EnrolmentService {
   private loadEnrolments(): void {
     this.apiService.get<Enrolment[]>(this.baseUrl).subscribe({
       next: (data) => this._enrolments.set(data),
-      error: (err) => console.error('Failed to load enrolments', err)
+      error: (err) => {
+        console.error('Failed to load enrolments', err);
+        this.toastService.error('Failed to load enrolments. Please try again.');
+      }
     });
   }
 
@@ -62,14 +67,28 @@ export class EnrolmentService {
       next: (enrolment) => {
         this._enrolments.update(enrolments => [...enrolments.filter(e => e.enrolmentId !== id), enrolment]);
       },
-      error: (err) => console.error('Failed to get enrolment by id', err)
+      error: (err) => {
+        console.error('Failed to get enrolment by id', err);
+        this.toastService.error('Failed to load enrolment details.');
+      }
     });
   }
   
   add(enrolment: Enrolment): void {
     this.apiService.post<Enrolment>(this.baseUrl, enrolment).subscribe({
-      next: (newEnrolment) => this._enrolments.update(enrolments => [...enrolments, newEnrolment]),
-      error: (err) => console.error('Failed to add enrolment', err)
+      next: (newEnrolment) => {
+        this._enrolments.update(enrolments => [...enrolments, newEnrolment]);
+        const courseName = newEnrolment.course?.name || 'course';
+        this.toastService.success(`Student successfully enrolled in ${courseName}!`);
+      },
+      error: (err) => {
+        console.error('Failed to add enrolment', err);
+        if (err.status === 409) {
+          this.toastService.error('Student is already enrolled in this course.');
+        } else {
+          this.toastService.error('Failed to create enrolment. Please try again.');
+        }
+      }
     });
   }
   
@@ -79,19 +98,31 @@ export class EnrolmentService {
         this._enrolments.update(enrolments => 
           enrolments.map(e => e.enrolmentId === enrolment.enrolmentId ? updatedEnrolment : e)
         );
+        this.toastService.success('Enrolment updated successfully!');
       },
-      error: (err) => console.error('Failed to update enrolment', err)
+      error: (err) => {
+        console.error('Failed to update enrolment', err);
+        this.toastService.error('Failed to update enrolment. Please try again.');
+      }
     });
   }
   
   delete(id: string): void {
+    const enrolmentToDelete = this._enrolments().find(e => e.enrolmentId === id);
+    const studentName = enrolmentToDelete?.student?.name || 'Student';
+    const courseName = enrolmentToDelete?.course?.name || 'course';
+    
     this.apiService.delete(`${this.baseUrl}/${id}`).subscribe({
       next: () => {
         this._enrolments.update(enrolments => 
           enrolments.filter(e => e.enrolmentId !== id)
         );
+        this.toastService.success(`${studentName} successfully unenrolled from ${courseName}!`);
       },
-      error: (err) => console.error('Failed to delete enrolment', err)
+      error: (err) => {
+        console.error('Failed to delete enrolment', err);
+        this.toastService.error('Failed to delete enrolment. Please try again.');
+      }
     });
   }
 }
